@@ -1,0 +1,22 @@
+#serviceCardSize{
+  width: 100%;
+  height: auto;
+}
+@media only screen  and (min-width:575px){
+  #serviceCardSize{
+    width: 100%;
+    height: 450px;
+  }
+}
+@media only screen  and (min-width:667px){
+  #serviceCardSize{
+    width: 100%;
+    height: 450px;
+  }
+}
+@media only screen  and (min-width:1024px){
+  #serviceCardSize{
+  width: 100%;
+  height: auto;
+  }
+}
