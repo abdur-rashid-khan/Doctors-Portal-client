@@ -5,7 +5,7 @@ const ServicesCardDisplay = ({img,content}) => {
   return (
     <div>
       {/* card lg:card-side bg-base-100 shadow-xl rounded infoCardSize */}
-      <div className="card  bg-gray-100 shadow-xl rounded border-2" id="serviceCardSize">
+      <div className="card  bg-gray-100 shadow-xl rounded-lg border" id="serviceCardSize">
         <figure className="px-10 pt-10">
           <img
             src={img}

@@ -8,8 +8,8 @@
       <div id="active">
          <Link
          style={{
-            backgroundColor: match ? "#3A4256" : "transparent",
-            color: match ? "#BDC8D1" : "#000",
+            backgroundColor: match ? "#0FCFEC" : "transparent",
+            color: match ? "#FFFFFF" : "#000",
             padding:match ? ".7rem" : "0rem",
             borderRadius:'3px'
          }}
