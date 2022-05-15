@@ -6,4 +6,4 @@ const PrimaryBtn = ({children}) => {
   );
 };
 
-export default PrimaryBtn;
+export default PrimaryBtn; 
