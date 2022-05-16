@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useAuthState, useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { Link, useLocation, useNavigate } from "react-router-dom";
@@ -31,13 +31,17 @@ const Login = () => {
     signInWithEmailAndPassword(e.email , e.password);
   };
 
+  useEffect(()=>{
+    if (user) {
+      navigate(form, { replace: true });
+      Swal.fire("Login successfully", "", "success");
+    }
+  },[user,navigate,form])
+  
   if (loading) {
     return <Loading></Loading>;
   }
-  if (user) {
-    navigate(form, { replace: true });
-    Swal.fire("Login successfully", "", "success");
-  }
+
   if (error) {
     errorElement = <p className="text-danger">Error: {error?.message}</p>;
   }

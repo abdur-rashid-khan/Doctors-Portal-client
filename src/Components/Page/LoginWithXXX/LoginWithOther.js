@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import auth from "../../../firebase.init";
 import { useNavigate, useLocation } from "react-router-dom";
 import Loading from "../../shared/Loading/Loading";
@@ -16,16 +16,26 @@ const LoginWithOther = () => {
   const loginWithGoogle = () => {
     signInWithGoogle();
   };
+
+
+  useEffect(()=>{
+    if (user) {
+      navigate(form, { replace: true });
+      Swal.fire("Login successfully", "", "success");
+    }
+  },[user , navigate , form])
+
+
   if (loading) {
     return <Loading></Loading>;
   }
-  if (user) {
-    navigate(form, { replace: true });
-    Swal.fire("Login successfully", "", "success");
-  }
+
+
   if (error) {
     errorElement = <p className="text-red-600">Error:{error?.message} </p>;
   }
+
+
   return (
     <div className="">
       {errorElement}

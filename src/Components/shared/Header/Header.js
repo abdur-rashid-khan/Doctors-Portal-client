@@ -13,12 +13,9 @@ const Header = () => {
     e.preventDefault();
       signOut(auth);
   }
-  if(!user){
-    // navigate('/login');
-  }
   return (
     <nav className="bg-slate-200  shadow fixed z-50 w-full">
-    <div className="container mx-auto w-full navbar">
+    <div className="container mx-auto w-full navbar px-4">
       <div className="navbar-start">
         <div className="dropdown">
           <label tabIndex="0" className="btn btn-ghost lg:hidden"> 
@@ -81,7 +78,7 @@ const Header = () => {
           </ul>
         </div>
         {
-          user?<button onClick={logOutBtn} className="text-slate-600 font-semibold">log Out</button> :
+          user?<button onClick={logOutBtn} className="text-black font-semibold">log Out</button> :
           <Link to={'/login'} >Login</Link>
         }
         

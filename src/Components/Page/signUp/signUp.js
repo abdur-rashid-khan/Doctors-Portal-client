@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import {
   useCreateUserWithEmailAndPassword,
@@ -27,28 +27,17 @@ const SignUp = () => {
       formState: { errors },
     } = useForm();
     const onSubmit = async (e) => {
-        console.log(e.email , e.password , e.userName);
         await createUserWithEmailAndPassword(e.email, e.password);
         await updateProfile({ displayName: e.userName });
         
 
     };
-  // const loginWithEmailPassword = async (e) => {
-  //   e.preventDefault();
-  //   const name = e.target.name.value;
-  //   const email = e.target.email.value;
-  //   const password = e.target.password.value;
-  //   if (password.length < 6) {
-  //     Swal("Enter Strong Password", "", "error");
-  //     return;
-  //   }
-  //   await createUserWithEmailAndPassword(email, password);
-  //   await updateProfile({ displayName: name });
-  // };
-  if (user) {
-    navigate('/login');
-    Swal.fire("your account create successfully", "", "success");
-  }
+  useEffect(()=>{
+    if (user) {
+      navigate('/login');
+      Swal.fire("your account create successfully", "", "success");
+    }
+  },[user , navigate ])
   let errorElement = "";
   if (error) {
     errorElement = <p className="text-danger">Error: {error?.message}</p>;

@@ -1,23 +1,33 @@
 import { format } from "date-fns";
 import React from "react";
-import { useAuthState } from 'react-firebase-hooks/auth';
+import { useAuthState } from "react-firebase-hooks/auth";
 import auth from "../../../../firebase.init";
+import { useForm } from "react-hook-form";
 
 const AppointmentModal = ({ treatment, date, setTreatment }) => {
-  const { name  , slots} = treatment;
   const [user, loading, error] = useAuthState(auth);
-  const BookingTreatment = e =>{
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const { name, slots } = treatment;
+  const BookingTreatment = (e) => {
     e.preventDefault();
-    const time = e.target.date.value; 
-    const userName = e.target.userName.value; 
-    const userNumber = e.target.userNumber.value; 
-    const slots = e.target.slots.value; 
-    const userEmail = e.target.userEmail.value; 
-    const data = {time , userName , userNumber , slots , userEmail}
+  };
+  const onSubmit = (data) => {
     console.log(data);
-    e.target.reset();
-    setTreatment(null)
-  }
+    const time = data.date;
+    const userName = user.displayName;
+    const userNumber = data.userNumber;
+    const slots = data.slots;
+    const userEmail = user.email;
+    const userData = { time, userName, userNumber, slots, userEmail };
+    console.log(userData);
+    data.reset();
+    setTreatment(null);
+  };
   return (
     <div>
       <input type="checkbox" id="booking-modal" className="modal-toggle" />
@@ -33,22 +43,27 @@ const AppointmentModal = ({ treatment, date, setTreatment }) => {
             </label>
           </div>
 
-          <form onSubmit={BookingTreatment}>
+          <form onSubmit={handleSubmit(onSubmit)}>
             <div className="">
               <input
                 type="text"
                 name="date"
                 id="date"
                 className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-gray-400 p-3 bg-transparent rounded text-gray-600"
-                value={format(date, "PP") || ""}
+                value={format(date, "PP")}
                 disabled
               />
             </div>
             <div className="py-3">
-              <select name="slots" className="select shadow-sm focus:ring-teal-500 focus:border-teal-500 mt-1 block w-full sm:text-sm border border-teal-500 p-3 bg-transparent rounded input-info text-gray-600 ">
-                {
-                  slots.map((time,index) => <option value={time || ''} key={index} className="hover:text-gray-600">{time}</option>)
-                }
+              <select
+                name="slots"
+                className="select shadow-sm focus:ring-teal-500 focus:border-teal-500 mt-1 block w-full sm:text-sm border border-teal-500 p-3 bg-transparent rounded input-info text-gray-600 "
+              >
+                {slots.map((time) => (
+                  <option value={time} className="hover:text-gray-600">
+                    {time}
+                  </option>
+                ))}
               </select>
             </div>
             <div className="py-3">
@@ -57,8 +72,7 @@ const AppointmentModal = ({ treatment, date, setTreatment }) => {
                 name="userName"
                 id="userName"
                 className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-teal-500 p-3 bg-transparent rounded input-success text-black"
-                value={user?.displayName || ""}
-                readOnly
+                value={user.displayName}
               />
             </div>
             <div className="py-3">
@@ -67,8 +81,7 @@ const AppointmentModal = ({ treatment, date, setTreatment }) => {
                 name="userEmail"
                 id="userEmail"
                 className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-teal-500 p-3 bg-transparent rounded input-success text-black"
-                value={user?.email || ""}
-                readOnly
+                value={user.email}
               />
             </div>
             <div className="py-3">
@@ -78,8 +91,38 @@ const AppointmentModal = ({ treatment, date, setTreatment }) => {
                 id="userNumber"
                 className="shadow-sm focus:ring-indigo-500 focus:border-indigo-500 mt-1 block w-full sm:text-sm border border-teal-500 p-3 bg-transparent rounded input-success text-black"
                 placeholder="Phone Number"
-                required
+                {...register("number", {
+                  required: {
+                    value: true,
+                    message: "Please enter your number",
+                  },
+                  minLength: {
+                    value: 11,
+                    message: "enter 11 digit mobile number",
+                  },
+                  maxLength: {
+                    value: 11,
+                    message: "enter 11 digit mobile number",
+                  },
+                })}
               />
+              <label className="">
+                {errors.number?.type === "required" && (
+                  <span className="text-red-500 text-sm pt-2">
+                    {errors.number.message}
+                  </span>
+                )}
+                {errors.number?.type === "minLength" && (
+                  <span className="text-red-500">
+                    {errors.number.message}
+                  </span>
+                )}
+                {errors.number?.type === "maxLength" && (
+                  <span className="text-red-500">
+                    {errors.number.message}
+                  </span>
+                )}
+              </label>
             </div>
             <button
               htmlFor="booking-modal"
