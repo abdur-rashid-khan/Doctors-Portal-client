@@ -4,17 +4,40 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from "../../../../firebase.init";
 
 const AppointmentModal = ({ treatment, date, setTreatment }) => {
-  const { name  , slots} = treatment;
+  const { name  , slots, _id} = treatment;
   const [user, loading, error] = useAuthState(auth);
   const BookingTreatment = e =>{
     e.preventDefault();
-    const time = e.target.date.value; 
     const userName = e.target.userName.value; 
     const userNumber = e.target.userNumber.value; 
-    const slots = e.target.slots.value; 
+    const slot = e.target.slots.value; 
     const userEmail = e.target.userEmail.value; 
-    const data = {time , userName , userNumber , slots , userEmail}
-    console.log(data);
+    const formattedDate = format(date, 'PP');
+    const booking = {
+      treatmentId: _id,
+      treatment: name,
+      date: formattedDate,
+      slot:slot,
+      patientEmail:userEmail,
+      patientName:userName ,
+      phone:userNumber ,
+  }
+    fetch('http://localhost:5000/booking',{
+      method:'POST',
+      headers:{
+        'content-type':'application/json'
+      },
+      body:JSON.stringify(booking)
+    })
+    .then(res => res.json())
+    .then(data => {
+      if(data.success){
+        alert('Booking success')
+      }else{
+        alert('already booking you')
+      }
+      console.log(data)
+    })
     e.target.reset();
     setTreatment(null)
   }
