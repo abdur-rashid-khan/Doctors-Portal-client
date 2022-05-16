@@ -1,9 +1,21 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { Link, useNavigate } from "react-router-dom";
+import auth from "../../../firebase.init";
 import CustomLink from "../../Page/Active/CustomLink";
+import {  signOut } from 'firebase/auth';
 import './Header.css'
 
 const Header = () => {
+  let navigate = useNavigate();
+  const [user, loading, error] = useAuthState(auth);
+  const logOutBtn = (e) =>{
+    e.preventDefault();
+      signOut(auth);
+  }
+  if(!user){
+    // navigate('/login');
+  }
   return (
     <nav className="bg-slate-200  shadow fixed z-50 w-full">
     <div className="container mx-auto w-full navbar">
@@ -68,7 +80,11 @@ const Header = () => {
             </li>
           </ul>
         </div>
-        <Link to={'/login'} >Login</Link>
+        {
+          user?<button onClick={logOutBtn} className="text-slate-600 font-semibold">log Out</button> :
+          <Link to={'/login'} >Login</Link>
+        }
+        
       </div>
     </div>
     </nav>

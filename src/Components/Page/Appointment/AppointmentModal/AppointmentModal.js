@@ -19,7 +19,7 @@ const AppointmentModal = ({ treatment, date, setTreatment }) => {
     <div>
       <input type="checkbox" id="booking-modal" className="modal-toggle" />
       <div className="modal modal-middle sm:modal-middle">
-        <div className="modal-box bg-gray-200">
+        <div className="modal-box bg-gray-50">
           <div className="">
             <h2 className="capitalize pb-4 text-xl text-cyan-500">{name}</h2>
             <label

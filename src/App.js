@@ -7,7 +7,7 @@ import Appointment from './Components/Page/Appointment/Appointment';
 import Reviews from './Components/Page/Reviews/Reviews';
 import Contact from './Components/Page/Contact/Contact';
 import Login from './Components/Page/Login/Login';
-import SignIn from './Components/Page/SignIn/SignIn';
+import SignUp from './Components/Page/signUp/signUp';
 
 function App() {
   return (
@@ -19,7 +19,7 @@ function App() {
         <Route path="/appointment" element={<Appointment />} />
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/contact" element={<Contact />} />
-        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signUp" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
       </Routes>
     </>

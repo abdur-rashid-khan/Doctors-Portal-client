@@ -9,3 +9,7 @@
 .hoverBtnSpacing:hover{
   letter-spacing: 3px;
 }
+.divider::before,
+.divider::after{
+  background-color: #cacaca;
+}
