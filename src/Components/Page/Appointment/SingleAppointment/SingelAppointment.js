@@ -31,8 +31,8 @@ const SingleAppointment = ({ appointment,setTreatment }) => {
                   : "btn font-bold bg-gradient-to-r from-emerald-400 to-sky-400 border-0 rounded text-slate-100 hoverBtnSpacing"
               }
               onClick={() => setTreatment(appointment)}
-              disabled={slot.length === 0}
-              style={{color:slot.length === 0 ? "black" : "white"}}
+              disabled={available.length === 0}
+              style={{color:available.length === 0 ? "black" : "white"}}
             >
               Booking Appointment
             </label>
