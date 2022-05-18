@@ -1,17 +1,27 @@
 import { format } from "date-fns";
 import React, { useEffect, useState } from "react";
+import { useQuery } from "react-query";
+import Loading from "../../../shared/Loading/Loading";
 import AppointmentModal from "../AppointmentModal/AppointmentModal";
 import SingleAppointment from "../SingleAppointment/SingelAppointment";
 
 const AvailableAppointment = ({ date }) => {
-  const [appointment, setAppointment] = useState([]);
+  // const [appointment, setAppointment] = useState([]);
   const [treatment, setTreatment] = useState(null);
   const formattedDate = format(date, 'PP');
-  useEffect(() => {
-    fetch(`http://localhost:5000/available?date=${formattedDate}`)
-      .then((res) => res.json())
-      .then((data) => setAppointment(data));
-  }, []);
+  // use react-query fast time 
+
+  // useEffect(() => {
+  //   fetch(`http://localhost:5000/available?date=${formattedDate}`)
+  //     .then((res) => res.json())
+  //     .then((data) => setAppointment(data));
+  // }, [formattedDate]);
+  const {data:appointment , isLoading , refetch} = useQuery(['available',formattedDate],() =>
+  fetch(`http://localhost:5000/available?date=${formattedDate}`).then(res =>
+    res.json()));
+  if(isLoading){
+    return <Loading></Loading>
+  }
   return (
     <div>
       <section className="py-10">
@@ -32,6 +42,7 @@ const AvailableAppointment = ({ date }) => {
                   appointment={s}
                   key={s._id}
                   setTreatment={setTreatment}
+                  
                 ></SingleAppointment>
               ))}
             </div>
@@ -40,8 +51,8 @@ const AvailableAppointment = ({ date }) => {
                 treatment={treatment}
                 date={date}
                 setTreatment={setTreatment}
+                refetch={refetch}
               ></AppointmentModal>
-              
             )}
           </div>
         </div>

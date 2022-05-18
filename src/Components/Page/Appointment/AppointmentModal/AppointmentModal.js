@@ -3,8 +3,9 @@ import React from "react";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import auth from "../../../../firebase.init";
 
-const AppointmentModal = ({ treatment, date, setTreatment }) => {
+const AppointmentModal = ({ treatment, date, setTreatment , refetch}) => {
   const { name  , slots, _id} = treatment;
+  console.log(slots);
   const [user, loading, error] = useAuthState(auth);
   const BookingTreatment = e =>{
     e.preventDefault();
@@ -38,7 +39,7 @@ const AppointmentModal = ({ treatment, date, setTreatment }) => {
       }
       console.log(data)
     })
-    e.target.reset();
+    refetch()
     setTreatment(null)
   }
   return (

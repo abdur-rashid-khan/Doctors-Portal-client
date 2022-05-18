@@ -1,6 +1,6 @@
 import React from "react";
 
-const SingleAppointment = ({ appointment,setTreatment }) => {
+const SingleAppointment = ({ appointment,setTreatment, }) => {
   const { name, available } = appointment;
   return (
     <div className="">
@@ -22,7 +22,7 @@ const SingleAppointment = ({ appointment,setTreatment }) => {
             </p>
           </div>
           <div className="card-actions justify-center">
-          {/* <  class="btn modal-button">open modal</> */}
+          {/* <  className="btn modal-button">open modal</> */}
             <label
             htmlFor="booking-modal"
               className={
@@ -40,6 +40,7 @@ const SingleAppointment = ({ appointment,setTreatment }) => {
         </div>
       </div>
     </div>
+
   );
 };
 
