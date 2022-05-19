@@ -12,6 +12,7 @@ import RequireAuth from './Components/Page/RequireAuth/RequireAuth';
 import DashBoard from './Components/Page/DashBoard/DashBoard';
 import MyAppointment from './Components/Page/DashBoard/MyAppointment/MyAppointment';
 import MyReview from './Components/Page/DashBoard/MyReview/MyReview';
+import TotalUser from './Components/Page/DashBoard/TotalUser/TotalUser';
 
 
 function App() {
@@ -29,7 +30,7 @@ function App() {
         </RequireAuth>} >
           <Route  index element={<MyAppointment></MyAppointment>}></Route>
           <Route path='review' element={<MyReview></MyReview>}></Route>
-
+          <Route path='total-user' element={<TotalUser></TotalUser>}></Route>
         </Route>
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/contact" element={<Contact />} />

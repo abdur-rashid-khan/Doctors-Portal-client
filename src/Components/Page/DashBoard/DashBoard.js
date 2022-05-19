@@ -27,8 +27,9 @@ const DashBoard = () => {
 					<label htmlFor="open-dashboard-menu" className="drawer-overlay"></label>
 					<ul className="menu p-4 overflow-y-auto w-80 bg-slate-100 border-r-1 shadow-lg  text-zinc-800">
 						{/* <!-- Sidebar content here --> */}
-						<li><Link className='' to={'/dashboard'}>My Appointment </Link></li>
-						<li><Link className='py-2 ' to={'/dashboard/review'}>My  Review</Link></li>
+						<li className='py-1 text-lg hover:bg-slate-300 rounded'><Link className='' to={'/dashboard'}>My Appointment </Link></li>
+						<li className='py-1 text-lg hover:bg-slate-300 rounded'><Link className='py-2 ' to={'/dashboard/review'}>My  Review</Link></li>
+						<li className='py-1 text-lg hover:bg-slate-300 rounded'><Link className='py-2 ' to={'/dashboard/total-user'}>All Users</Link></li>
 					</ul>
 
 				</div>

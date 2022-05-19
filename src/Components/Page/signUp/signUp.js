@@ -32,8 +32,6 @@ const SignUp = () => {
   const onSubmit = async (e) => {
     await createUserWithEmailAndPassword(e.email, e.password);
     await updateProfile({ displayName: e.userName });
-
-
   };
   useEffect(() => {
     if (token) {
@@ -41,11 +39,6 @@ const SignUp = () => {
       Swal.fire("your account create successfully", "", "success");
     }
   }, [token,user, navigate])
-
-  // if (token) {
-  //   navigate('/login');
-  //   Swal.fire("your account create successfully", "", "success");
-  // }
 
   let errorElement = "";
   if (error) {
