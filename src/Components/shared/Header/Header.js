@@ -12,6 +12,7 @@ const Header = () => {
   const logOutBtn = (e) => {
     e.preventDefault();
     signOut(auth);
+    localStorage.removeItem('token')
   }
   return (
     <nav className="bg-slate-200  shadow fixed z-50 w-full">

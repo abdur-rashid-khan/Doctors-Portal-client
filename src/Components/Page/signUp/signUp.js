@@ -11,8 +11,9 @@ import auth from "../../../firebase.init";
 import "./signUp.css";
 import LoginWithXX from "../LoginWithXXX/LoginWithOther";
 import { useForm } from "react-hook-form";
+import UseToken from "../../Hooks/UseToken/UseToken";
 const SignUp = () => {
-  const [agree , setAgree ] = useState(false);
+  const [agree, setAgree] = useState(false);
   const navigate = useNavigate();
   // const location = useLocation();
   // const form = location.state?.from?.pathname || "/";
@@ -20,24 +21,32 @@ const SignUp = () => {
   const [updateProfile] = useUpdateProfile(auth);
   const [createUserWithEmailAndPassword, user, loading, error] =
     useCreateUserWithEmailAndPassword(auth, { sendEmailVerification: true });
-    const {
-      register,
-      handleSubmit,
-      watch,
-      formState: { errors },
-    } = useForm();
-    const onSubmit = async (e) => {
-        await createUserWithEmailAndPassword(e.email, e.password);
-        await updateProfile({ displayName: e.userName });
-        
+  // token hook
+  const [token] = UseToken(user);
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = async (e) => {
+    await createUserWithEmailAndPassword(e.email, e.password);
+    await updateProfile({ displayName: e.userName });
 
-    };
-  useEffect(()=>{
-    if (user) {
+
+  };
+  useEffect(() => {
+    if (token) {
       navigate('/login');
       Swal.fire("your account create successfully", "", "success");
     }
-  },[user , navigate ])
+  }, [token,user, navigate])
+
+  // if (token) {
+  //   navigate('/login');
+  //   Swal.fire("your account create successfully", "", "success");
+  // }
+
   let errorElement = "";
   if (error) {
     errorElement = <p className="text-danger">Error: {error?.message}</p>;
@@ -45,7 +54,7 @@ const SignUp = () => {
   if (loading) {
     return <Loading></Loading>;
   }
-  const agreeBtn = e =>{
+  const agreeBtn = e => {
     const agreeValue = e.target.checked;
     setAgree(agreeValue)
   }
@@ -69,9 +78,9 @@ const SignUp = () => {
             <form className="mt-8 space-y-6" onSubmit={handleSubmit(onSubmit)}>
               <input type="hidden" name="remember" defaultValue="true" />
               <div className="rounded-md shadow-sm -space-y-px">
-              <div className="">
+                <div className="">
                   <label htmlFor="userName" className="text-slate-700 pt-2">
-                    User Name 
+                    User Name
                   </label>
                   <input
                     id="userName"
@@ -87,7 +96,7 @@ const SignUp = () => {
                       },
                       minLength: {
                         value: 3,
-                        message:'min name characters 3 '
+                        message: 'min name characters 3 '
                       }
                     })}
                   />
@@ -202,25 +211,25 @@ const SignUp = () => {
                     agree terms and conditions
                   </label>
                 </div>
-                {errorElement && errorElement}
               </div>
+              {errorElement && errorElement}
               <div>
                 {
-                  agree?
-                  <button
-                  type="submit"
-                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm rounded-md text-white bg-gradient-to-r from-emerald-400 to-sky-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 font-bold hoverBtnSpacing"
-                >
-                  Sign In
-                </button>
-                :
-                <button
-                  type="submit"
-                  disabled
-                  className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm rounded-md text-white bg-gradient-to-r from-emerald-300 to-sky-300  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 font-bold"
-                >
-                  Sign In
-                </button>
+                  agree ?
+                    <button
+                      type="submit"
+                      className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm rounded-md text-white bg-gradient-to-r from-emerald-400 to-sky-400  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 font-bold hoverBtnSpacing"
+                    >
+                      Sign In
+                    </button>
+                    :
+                    <button
+                      type="submit"
+                      disabled
+                      className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm rounded-md text-white bg-gradient-to-r from-emerald-300 to-sky-300  focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-sky-500 font-bold"
+                    >
+                      Sign In
+                    </button>
                 }
               </div>
             </form>
