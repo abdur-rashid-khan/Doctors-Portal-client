@@ -5,7 +5,7 @@ import Loading from "../../shared/Loading/Loading";
 import Swal from "sweetalert2";
 import googleIcon from '../../../assets/icons/google.png'
 import fbIcon from '../../../assets/icons/fb.png'
-import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import { useSignInWithFacebook, useSignInWithGoogle } from "react-firebase-hooks/auth";
 
 const LoginWithOther = () => {
   let navigate = useNavigate();
@@ -13,25 +13,31 @@ const LoginWithOther = () => {
   const form = location.state?.from?.pathname || "/";
   let errorElement = "";
   const [signInWithGoogle, user, loading, error] = useSignInWithGoogle(auth);
+  const [signInWithFacebook, fbUser, fbLoading, fbError] = useSignInWithFacebook(auth);
+  // facebook login
+  const fbLogIn =()=>{
+    signInWithFacebook()
+  }
+  // for google
   const loginWithGoogle = () => {
     signInWithGoogle();
   };
 
 
   useEffect(()=>{
-    if (user) {
+    if (user || fbUser ) {
       navigate(form, { replace: true });
       Swal.fire("Login successfully", "", "success");
     }
-  },[user , navigate , form])
+  },[user ,fbUser, navigate , form])
 
 
-  if (loading) {
+  if (loading || fbLoading) {
     return <Loading></Loading>;
   }
 
 
-  if (error) {
+  if (error || fbError) {
     errorElement = <p className="text-red-600">Error:{error?.message} </p>;
   }
 
@@ -49,7 +55,7 @@ const LoginWithOther = () => {
           </button>
         </div>
         <div className="google">
-          <button>
+          <button onClick={fbLogIn}>
             <img style={{width:'36px',height:'36px'}} src={fbIcon} alt="fb icon" />
           </button>
         </div>

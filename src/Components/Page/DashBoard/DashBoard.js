@@ -13,11 +13,11 @@ const DashBoard = () => {
 					<div className="text-left mt-4 ">
 						<label htmlFor="open-dashboard-menu" className="w-10 rounded h-10 inline-block cursor-pointer bg-blue-500 hover:bg-blue-800 text-white lg:hidden"><span><ChevronRightIcon /></span> </label>
 					</div>
-					<div className="text-center py-2">
-						<div id="header">
+					<div className="text-center ">
+						<div id="header" className='py-6'>
 							<h1 className='text-4xl font-bold '>DashBoard </h1>
 						</div>
-						<div className="">
+						<div className="text-left px-3">
 							<Outlet></Outlet>
 						</div>
 					</div>
@@ -27,8 +27,8 @@ const DashBoard = () => {
 					<label htmlFor="open-dashboard-menu" className="drawer-overlay"></label>
 					<ul className="menu p-4 overflow-y-auto w-80 bg-slate-100 border-r-1 shadow-lg  text-zinc-800">
 						{/* <!-- Sidebar content here --> */}
-						<li><Link to={'/dashboard'}>Sidebar Item 1</Link></li>
-						<li><Link to={'/dashboard/review'}>Sidebar Item 2</Link></li>
+						<li><Link className='' to={'/dashboard'}>My Appointment </Link></li>
+						<li><Link className='py-2 ' to={'/dashboard/review'}>My  Review</Link></li>
 					</ul>
 
 				</div>
