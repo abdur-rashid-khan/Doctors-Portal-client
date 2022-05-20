@@ -11,8 +11,8 @@ const MyAppointment = () => {
     const navigate = useNavigate()
     useEffect(() => {
         if (user) {
-            // http://localhost:5000/booking?patientEmail=rashidkhanbd57@gmail.com
-            fetch(`http://localhost:5000/booking?patientEmail=${user.email}`, {
+            // https://fast-fjord-41065.herokuapp.com/booking?patientEmail=rashidkhanbd57@gmail.com
+            fetch(`https://fast-fjord-41065.herokuapp.com/booking?patientEmail=${user.email}`, {
                 method: "GET",
                 headers: {
                     'authorization': `bearer ${localStorage.getItem('token')}`,

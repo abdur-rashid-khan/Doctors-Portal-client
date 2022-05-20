@@ -5,7 +5,7 @@ import MackingAdmin from '../MackingAdmin/MackingAdmin';
 
 const TotalUser = () => {
     const { isLoading, error, data: user, refetch } = useQuery('userData', () =>
-        fetch('http://localhost:5000/total-user', {
+        fetch('https://fast-fjord-41065.herokuapp.com/total-user', {
             method: "GET",
             headers: {
                 'authorization': `bearer ${localStorage.getItem('token')}`

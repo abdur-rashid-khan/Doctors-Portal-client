@@ -24,7 +24,7 @@ const AppointmentModal = ({ treatment, date, setTreatment , refetch}) => {
       patientName:userName ,
       phone:userNumber ,
   }
-    fetch('http://localhost:5000/booking',{
+    fetch('https://fast-fjord-41065.herokuapp.com/booking',{
       method:'POST',
       headers:{
         'content-type':'application/json'

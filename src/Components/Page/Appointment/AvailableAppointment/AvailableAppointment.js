@@ -12,12 +12,12 @@ const AvailableAppointment = ({ date }) => {
   // use react-query fast time 
 
   // useEffect(() => {
-  //   fetch(`http://localhost:5000/available?date=${formattedDate}`)
+  //   fetch(`https://fast-fjord-41065.herokuapp.com/available?date=${formattedDate}`)
   //     .then((res) => res.json())
   //     .then((data) => setAppointment(data));
   // }, [formattedDate]);
   const {data:appointment , isLoading , refetch} = useQuery(['available',formattedDate],() =>
-  fetch(`http://localhost:5000/available?date=${formattedDate}`).then(res =>
+  fetch(`https://fast-fjord-41065.herokuapp.com/available?date=${formattedDate}`).then(res =>
     res.json()));
   if(isLoading){
     return <Loading></Loading>

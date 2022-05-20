@@ -5,7 +5,7 @@ const MackingAdmin = ({ user ,refetch }) => {
     // adminBtn 
     const {email } = user;
     const adminBtn = () => {
-        fetch(`http://localhost:5000/user/admin/${email}`, {
+        fetch(`https://fast-fjord-41065.herokuapp.com/user/admin/${email}`, {
             method: "PUT",
             headers: {
                 authorization:`bearer ${localStorage.getItem('token')}`
