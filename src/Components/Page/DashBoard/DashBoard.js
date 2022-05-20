@@ -2,8 +2,13 @@ import React from 'react';
 import { Link, Outlet } from 'react-router-dom';
 // for hero icon 
 import { ChevronRightIcon } from '@heroicons/react/solid'
+import UseAdmin from '../../Hooks/UseAdmin/UseAdmin';
+import auth from '../../../firebase.init';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const DashBoard = () => {
+	const [user] = useAuthState(auth);
+	const [admin] = UseAdmin(user);
 	return (
 		<div className="container mx-auto px-2 lg:px-0">
 			<div className="drawer drawer-mobile pt-16">
@@ -29,7 +34,9 @@ const DashBoard = () => {
 						{/* <!-- Sidebar content here --> */}
 						<li className='py-1 text-lg hover:bg-slate-300 rounded'><Link className='' to={'/dashboard'}>My Appointment </Link></li>
 						<li className='py-1 text-lg hover:bg-slate-300 rounded'><Link className='py-2 ' to={'/dashboard/review'}>My  Review</Link></li>
-						<li className='py-1 text-lg hover:bg-slate-300 rounded'><Link className='py-2 ' to={'/dashboard/total-user'}>All Users</Link></li>
+						{
+							admin && <li className='py-1 text-lg hover:bg-slate-300 rounded'><Link className='py-2 ' to={'/dashboard/total-user'}>All Users</Link></li>
+						}
 					</ul>
 
 				</div>

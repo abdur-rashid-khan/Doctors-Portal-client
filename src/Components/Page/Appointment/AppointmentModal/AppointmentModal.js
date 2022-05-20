@@ -1,11 +1,12 @@
 import { format } from "date-fns";
 import React from "react";
 import { useAuthState } from 'react-firebase-hooks/auth';
+import Swal from "sweetalert2";
 import auth from "../../../../firebase.init";
 
 const AppointmentModal = ({ treatment, date, setTreatment , refetch}) => {
   const { name  , slots, _id} = treatment;
-  console.log(slots);
+  // console.log(slots);
   const [user, loading, error] = useAuthState(auth);
   const BookingTreatment = e =>{
     e.preventDefault();
@@ -33,9 +34,9 @@ const AppointmentModal = ({ treatment, date, setTreatment , refetch}) => {
     .then(res => res.json())
     .then(data => {
       if(data.success){
-        alert('Booking success')
+        Swal.fire('Booking success',' ','success')
       }else{
-        alert('already booking you')
+        Swal.fire('already booking you',' ','info')
       }
       console.log(data)
     })
