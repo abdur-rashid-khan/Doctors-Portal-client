@@ -20,7 +20,7 @@ const DashBoard = () => {
 					</div>
 					<div className="text-center ">
 						<div id="header" className='py-6'>
-							<h1 className='text-4xl font-bold '>DashBoard </h1>
+							<h1 className='text-4xl font-bold font-serif'>Dash Board </h1>
 						</div>
 						<div className="text-left px-3">
 							<Outlet></Outlet>
@@ -35,7 +35,12 @@ const DashBoard = () => {
 						<li className='py-1 text-lg hover:bg-slate-300 rounded'><Link className='' to={'/dashboard'}>My Appointment </Link></li>
 						<li className='py-1 text-lg hover:bg-slate-300 rounded'><Link className='py-2 ' to={'/dashboard/review'}>My  Review</Link></li>
 						{
-							admin && <li className='py-1 text-lg hover:bg-slate-300 rounded'><Link className='py-2 ' to={'/dashboard/total-user'}>All Users</Link></li>
+							admin && <>
+
+								<li className='py-1 text-lg hover:bg-slate-300 rounded'><Link className='py-2 ' to={'/dashboard/total-user'}>All Users</Link></li>
+								<li className='py-1 text-lg hover:bg-slate-300 rounded'><Link className='py-2 ' to={'/dashboard/add-doctor'}>Add Doctor</Link></li>
+
+							</>
 						}
 					</ul>
 

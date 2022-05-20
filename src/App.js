@@ -15,6 +15,7 @@ import MyReview from './Components/Page/DashBoard/MyReview/MyReview';
 import TotalUser from './Components/Page/DashBoard/TotalUser/TotalUser';
 import AdminChecking from './Components/Page/AdminChecking/AdminChecking';
 import NoPageFound from './Components/Page/NoPageFound/NoPageFound';
+import AddDoctor from './Components/Page/DashBoard/AddDoctors/AddDoctor';
 
 
 function App() {
@@ -36,7 +37,12 @@ function App() {
             <AdminChecking>
               <TotalUser></TotalUser>
             </AdminChecking>
-            }></Route>
+          }></Route>
+          <Route path='add-doctor' element={
+            <AdminChecking>
+              <AddDoctor></AddDoctor>
+            </AdminChecking>
+          }></Route>
         </Route>
         <Route path="/reviews" element={<Reviews />} />
         <Route path="/contact" element={<Contact />} />
